@@ -3,12 +3,19 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use Faker\Generator as Faker;
+use Modules\Academic\Entities\Course;
+use Modules\Academic\Entities\Department;
+use Modules\Academic\Entities\Slqf;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Course::class, function (Faker $faker) {
     return [
         'course_name' => $faker->word,
-        'course_category' => $faker->numberBetween(1,10),
+        'course_category' => $faker->numberBetween(1, 10),
         'course_code' => $faker->postcode,
+        'status' => 1,
+        'dept_id' => function () {
+            return Department::all()->random();
+        }
 
     ];
 });

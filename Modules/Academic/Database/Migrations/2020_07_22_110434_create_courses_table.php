@@ -34,8 +34,8 @@ class CreateCoursesTable extends Migration
             $table->unsignedInteger('dept_id');
             $table->foreign('dept_id')->references('dept_id')->on('departments')->onDelete('cascade');
 
-            $table->unsignedBigInteger('slqf_id')->unsigned();
-            $table->foreign('slqf_id')->references('slqf_id')->on('slqfs')->onDelete('cascade');
+           // $table->unsignedInteger('slqf_id');
+            //$table->foreign('slqf_id')->references('slqf_id')->on('slqfs')->onDelete('cascade');
             $table->timestamps();
         });
     }

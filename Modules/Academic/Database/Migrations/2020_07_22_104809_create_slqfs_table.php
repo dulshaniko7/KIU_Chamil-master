@@ -17,7 +17,8 @@ class CreateSlqfsTable extends Migration
             $table->bigIncrements('slqf_id');
             $table->string('slqf_number', 10);
             $table->string('slqf', 255);
-            $table->timestamp('add_date')->nullable();
+
+
         });
     }
 
