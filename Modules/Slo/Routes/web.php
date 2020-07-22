@@ -11,6 +11,15 @@
 |
 */
 
-Route::prefix('slo')->group(function() {
+Route::prefix('slo')->group(function () {
     Route::get('/', 'SloController@index');
 });
+
+
+
+Route::get('/slo/QuickRegistrations', 'QuickRegistrationController@index');
+
+Route::get('/slo/batch', 'BatchController@index');
+Route::post('/slo/batch', 'BatchController@store');
+
+Route::get('/slo/IdRange', 'IdRangeController@index');

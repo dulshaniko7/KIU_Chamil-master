@@ -274,7 +274,7 @@ return [
                     'submenu' => [
                         [
                             'text' => 'Quick Registration',
-                            'url' => 'std_reg_quick',
+                            'url' => '/slo/QuickRegistrations',
                             'icon' => 'fas fa-fw fa-user',
                         ],
                         [
@@ -320,13 +320,13 @@ return [
                         ],
                         [
                             'text' => 'Batch',
-                            'url' => 'batch',
+                            'url' => '/slo/batch',
                             'icon' => 'fas fa-users',
 
                         ],
                         [
                             'text' => 'ID Range',
-                            'url' => 'id_range',
+                            'url' => '/slo/IdRange',
                             'icon' => 'fas fa-sort-numeric-up-alt',
 
                         ],
