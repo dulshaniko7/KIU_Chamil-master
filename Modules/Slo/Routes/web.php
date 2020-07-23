@@ -31,4 +31,6 @@ Route::get('/slo/batch','BatchController@index')->name('batches.index');
 Route::post('/slo/batch','BatchController@store')->name('batches.store');
 Route::get('/slo/batch/{batch}','BatchController@show')->name('batches.show');
 
-//Route::resource('batches','BatchController');
+Route::get('/error', function (){
+return view('error');
+})->name('error');

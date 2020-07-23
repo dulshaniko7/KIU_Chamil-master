@@ -48,6 +48,9 @@ class BatchController extends Controller
                 'batch_start_date' => 'required',
                 'batch_end_date' => 'required'
             ]);
+        if ($validator->fails()) {
+            return view('slo::error');
+        }
 
         $batch = new Batch();
         $batch->batch_name = $request->batch_name;
@@ -55,11 +58,15 @@ class BatchController extends Controller
         $batch->batch_start_date = $request->batch_start_date;
         $batch->batch_end_date = $request->batch_end_date;
 
-        $course = Course::findOrFail($request->course_id);
+       // $course = Course::findOrFail($request->course_id);
 
-        $batch->course_id = $request->course_id;
-        $batch->save();
 
+          $batch->course_id = $request->course_id;
+
+//
+         if ($batch->save()) {
+             return redirect()->route('batches.index');
+        }
 
         // if ($course->batches()->save($batch)) {
         //   return redirect()->route('batches.show', $batch->id);
@@ -73,7 +80,8 @@ class BatchController extends Controller
      * @param int $id
      * @return Response
      */
-    public function show($id)
+    public
+    function show($id)
     {
         return view('slo::show')->with($id);
     }
@@ -83,7 +91,8 @@ class BatchController extends Controller
      * @param int $id
      * @return Response
      */
-    public function edit($id)
+    public
+    function edit($id)
     {
         return view('slo::edit');
     }
@@ -94,7 +103,8 @@ class BatchController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public
+    function update(Request $request, $id)
     {
         //
     }
@@ -104,7 +114,8 @@ class BatchController extends Controller
      * @param int $id
      * @return Response
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         //
     }

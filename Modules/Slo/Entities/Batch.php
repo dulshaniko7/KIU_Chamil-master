@@ -11,7 +11,7 @@ class Batch extends Model
 
     public function course()
     {
-        $this->belongsTo(Course::class);
+      return $this->belongsTo(Course::class,'course_id','course_id');
     }
 
 

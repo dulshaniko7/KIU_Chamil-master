@@ -16,7 +16,7 @@ class Course extends Model
 
     public function batches()
     {
-        $this->hasMany(Batch::class);
+        return $this->hasMany(Batch::class);
     }
 
     protected $primaryKey = 'course_id';

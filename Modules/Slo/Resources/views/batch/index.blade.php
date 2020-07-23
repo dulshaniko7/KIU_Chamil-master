@@ -39,11 +39,16 @@
             </tr>
             </thead>
             <tbody>
-
+            @foreach($batches as $batch)
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{$batch->id}}</td>
+                <td>
+                    @if($batch->course)
+                    {{ $batch->course->course_name }}
+                    @endif
+
+                </td>
+                <td>{{$batch->batch_name}}</td>
                 <td>
                     <center>
                         <button role="button" href="#" class="btn btn-primary btn-circle btn-sm btn-edit"
@@ -57,7 +62,7 @@
                 </td>
 
             </tr>
-
+            @endforeach
 
         </table>
     </div>
