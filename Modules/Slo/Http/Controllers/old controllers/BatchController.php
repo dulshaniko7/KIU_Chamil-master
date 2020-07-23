@@ -5,10 +5,10 @@ namespace Modules\Slo\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Validator;
-use Modules\Academic\Entities\Course;
+use Illuminate\Support\Facades\App;
 use Modules\Slo\Entities\batch;
-
+use Illuminate\Support\Facades\Validator;
+use Modules\Slo\Entities\BaseModel;
 
 class BatchController extends Controller
 {
@@ -18,10 +18,10 @@ class BatchController extends Controller
      */
     public function index()
     {
-        $batches = Batch::all();
-        $courses = Course::all();
-        //return response()->json(['batches' => $batches]);
-        return view('slo::batch.index')->with('courses', $courses)->with('batches', $batches);
+        $batchs = batch::query();
+        $batchs = $batchs->paginate(10);
+        return view("slo::batch.index", compact('batchs'));
+        // return view('slo::index');
     }
 
     /**
@@ -40,32 +40,38 @@ class BatchController extends Controller
      */
     public function store(Request $request)
     {
-        //  $postData = Validator::make($request->all(),
-        $validator = Validator::make($request->all(),
-            ['batch_name' => 'required',
-                'course_id' => 'required',
-                'max_student' => 'required|int',
-                'batch_start_date' => 'required',
-                'batch_end_date' => 'required'
-            ]);
 
-        $batch = new Batch();
-        $batch->batch_name = $request->batch_name;
-        $batch->max_student = $request->max_student;
-        $batch->batch_start_date = $request->batch_start_date;
-        $batch->batch_end_date = $request->batch_end_date;
+        $model = new batch();
 
-        $course = Course::findOrFail($request->course_id);
+        $postData = Validator::make($request->all(), [
+            "course_id" => "required",
+            "batch_name" => "required"
+        ]);
 
-        $batch->course_id = $request->course_id;
-        $batch->save();
+        if ($postData->fails()) {
+            return BaseModel::handleValidationErrors($postData->errors());
+        } else {
+            $data = $postData->validated();
+        }
 
+        foreach ($data as $key => $value) {
+            $model->$key = $value;
+        }
 
-        // if ($course->batches()->save($batch)) {
-        //   return redirect()->route('batches.show', $batch->id);
-        //} else {
-        //  return view('slo::error');
-        //}
+        // $model::create($data);
+        $dataResponse = BaseModel::saveModel($model);
+
+        return BaseModel::handleSuccessResponse($dataResponse);
+
+        // $batch = new Batch();
+        // $postData = Validator::make($request->all(), [
+        //     "course_id" => "required",
+        //     "batch_name" => "required"
+        // ]);
+
+        // $batch::create($postData);
+
+        // dd(request('course'));
     }
 
     /**
@@ -75,7 +81,7 @@ class BatchController extends Controller
      */
     public function show($id)
     {
-        return view('slo::show')->with($id);
+        return view('slo::show');
     }
 
     /**

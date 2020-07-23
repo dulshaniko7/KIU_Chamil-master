@@ -297,7 +297,7 @@ return [
                     'submenu' => [
                         [
                             'text' => 'Faculty',
-                            'url' => 'faculty',
+                            'url' => '/slo/faculty',
                             'icon' => 'fas fa-fw fa-university',
                         ],
                         [

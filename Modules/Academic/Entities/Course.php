@@ -3,6 +3,7 @@
 namespace Modules\Academic\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\Slo\Entities\Batch;
 
 class Course extends Model
 {
@@ -13,4 +14,10 @@ class Course extends Model
         $this->belongsTo(Slqf::class);
     }
 
+    public function batches()
+    {
+        $this->hasMany(Batch::class);
+    }
+
+    protected $primaryKey = 'course_id';
 }

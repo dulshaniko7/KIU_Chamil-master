@@ -18,10 +18,13 @@ Route::get('/', function () {
 });
 
 
-
+/*
 Route::get('/faculty', function () {
     return view('faculty');
 });
+
+*/
+
 Route::get('/department', function () {
     return view('department');
 });
