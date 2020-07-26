@@ -40,6 +40,7 @@ class BatchController extends Controller
      */
     public function store(Request $request)
     {
+
         //  $postData = Validator::make($request->all(),
         $validator = Validator::make($request->all(),
             ['batch_name' => 'required',
@@ -58,14 +59,12 @@ class BatchController extends Controller
         $batch->batch_start_date = $request->batch_start_date;
         $batch->batch_end_date = $request->batch_end_date;
 
-       // $course = Course::findOrFail($request->course_id);
-
-
-          $batch->course_id = $request->course_id;
+        // $course = Course::findOrFail($request->course_id);
+        $batch->course_id = $request->course_id;
 
 //
-         if ($batch->save()) {
-             return redirect()->route('batches.index');
+        if ($batch->save()) {
+            return redirect()->route('batches.index');
         }
 
         // if ($course->batches()->save($batch)) {
@@ -80,7 +79,7 @@ class BatchController extends Controller
      * @param int $id
      * @return Response
      */
-    public
+
     function show($id)
     {
         return view('slo::show')->with($id);
